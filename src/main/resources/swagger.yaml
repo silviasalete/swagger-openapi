@@ -3,29 +3,29 @@ info:
   title: Demonstration of the use Swagger OpenAPI
   version: 0.0.1
 tags:
-  - name: users
+  - name: items
 paths:
-  /users:
+  /items:
     post:
       tags:
-        - users
-      summary: Create user
-      description: Create user and return data user
-      operationId: createUser
+        - items
+      summary: Create item
+      description: Create item and return data item
+      operationId: createItem
       requestBody:
-        description: Receive json data user
+        description: Receive json data item
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserForm'
+              $ref: '#/components/schemas/ItemForm'
       responses:
         '200':
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserWeb'
+                $ref: '#/components/schemas/ItemWeb'
         '404':
           description: Not found
         default:
@@ -36,24 +36,24 @@ paths:
                 $ref: '#/components/schemas/Error'
     put:
       tags:
-        - users
-      summary: Update user
-      description: Update user and return new data user
-      operationId: updateUser
+        - items
+      summary: Update item
+      description: Update item and return new data item
+      operationId: updateItem
       requestBody:
-        description: Receive json data user
+        description: Receive json data item
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: '#/components/schemas/Item'
       responses:
         '200':
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/Item'
         '404':
           description: Not found
         default:
@@ -62,13 +62,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /users/{id}:
+  /items/{id}:
     get:
       tags:
-        - users
-      summary: Get user
-      description:  Get user by id
-      operationId: getUserById
+        - items
+      summary: Get item
+      description:  Get item by id
+      operationId: getItemById
       parameters:
         - name: id
           in: path
@@ -82,7 +82,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserWeb'
+                $ref: '#/components/schemas/ItemWeb'
         '404':
           description: Not found
         default:
@@ -93,10 +93,10 @@ paths:
                 $ref: '#/components/schemas/Error'
     delete:
       tags:
-        - users
-      summary: Delete user
-      description:  Delete user by id
-      operationId: deleteUserById
+        - items
+      summary: Delete item
+      description:  Delete item by id
+      operationId: deleteItemById
       parameters:
         - name: id
           in: path
@@ -111,7 +111,7 @@ paths:
             application/json:
               schema:
                 type: string
-                example: User deleted
+                example: Item deleted
         '404':
           description: Not found
         default:
@@ -122,58 +122,38 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    User:
+    Item:
       type: object
       required:
         - id
-        - name
-        - email
-        - password
+        - context
       properties:
         id:
           type: integer
           format: int64
-        name:
+        context:
           type: string
-          example: John
-        email:
-          type: string
-          example: john@email.com
-        password:
-          type: string
-          example: '123456'
-    UserForm:
+          example: Lorem ipsum
+    ItemForm:
       type: object
       required:
-        - name
-        - email
-        - password
+        - context
       properties:
-        name:
+        context:
           type: string
-          example: John
-        email:
-          type: string
-          example: john@email.com
-        password:
-          type: string
-          example: '123456'
-    UserWeb:
+          example: Lorem ipsum
+    ItemWeb:
       type: object
       required:
         - id
-        - name
-        - email
+        - context
       properties:
         id:
           type: integer
           format: int64
-        name:
+        context:
           type: string
-          example: John
-        email:
-          type: string
-          example: john@email.com
+          example: Lorem ipsum
     Error:
       type: object
       required:
